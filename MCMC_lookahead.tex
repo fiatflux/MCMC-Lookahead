@@ -29,7 +29,7 @@ MCMC typically requires generating a great deal of samples from the distribution
 Because exactly convergent MCMC inherently draws samples in serial, the walltime required can preclude its application to processes that require great computational effort to generate proposals.
 Many practitioners therefore resort to approximate methods that lack distributional convergence guarantees, either to expedite the serial process or to parallelize the effort (e.g. with multiple interacting chains).
 
-This whitepaper presents a way to parallelize MCMC, while maintaining the strong convergence guarantees of algorithms such as Metropolis-Hastings and Gibbs samplers.
+These notes present a way to parallelize MCMC, while maintaining the strong convergence guarantees of algorithms such as Metropolis-Hastings and Gibbs samplers.
 We will call this method `MCMC lookahead'.
 Discussion will use the concepts and language of traditional Metropolis-Hastings, but can easily be extended to other sampling mechanisms that use a proposal/rejection scheme.
 
@@ -85,7 +85,7 @@ where each $\bf{\theta_i}$ are nodes on which the values $L(\bf{x}; \bf{\theta})
 
 At a minimum, interpolation of the likelihood function in this manner requires a number of nodes comparable to the effective dimensionality of the target distribution.
 If the target distribution is rugged, many more nodes may be required.
-Therefore pruning the lookahead tree is only useful where (1) the number of MCMC proposals required for convergence is much larger than the effective dimension of the target distribution, and (2) it is substantially faster to solve a dense triangular linear system of dimension suitable to attain fair approximation of the likelihood function.
+Therefore pruning the lookahead tree is only useful where (1) the number of MCMC proposals required for convergence is much larger than the effective dimension of the target distribution, and (2) it is substantially faster to solve a dense symmetric linear system of dimension suitable to attain fair approximation of the likelihood function.
 
 In cases where interpolation of the likelihood function does not provide accurate results, it may still be possible to approximate a distribution of likelihoods faster than the full process model can be evaluated.
 This is a possible topic for future research.
